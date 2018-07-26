@@ -1,19 +1,16 @@
 package com.oocl.jpaPractice.oneToMany.entity;
 
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 /**
  * @author Dylan Wei
- * @date 2018-07-26 13:49
+ * @date 2018-07-26 17:57
  */
-
-@Table(name = "employee")
 @Entity
-public class Employee{
+@Table(name = "company")
+public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,13 +19,8 @@ public class Employee{
     @Column
     private ZonedDateTime createDate = ZonedDateTime.now();
 
-    public Employee() {
-    }
-
-    public Employee(Long id, String name){
-        this.id = id;
-        this.name = name;
-    }
+    @OneToMany
+    private List<Employee> employees;
 
     public Long getId() {
         return id;
@@ -52,5 +44,14 @@ public class Employee{
 
     public void setCreateDate(ZonedDateTime createDate) {
         this.createDate = createDate;
+    }
+
+    public Company(Long id, String name, ZonedDateTime createDate) {
+        this.id = id;
+        this.name = name;
+        this.createDate = createDate;
+    }
+
+    public Company() {
     }
 }
