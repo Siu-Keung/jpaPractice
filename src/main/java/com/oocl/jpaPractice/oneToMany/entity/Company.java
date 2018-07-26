@@ -19,7 +19,7 @@ public class Company {
     @Column
     private ZonedDateTime createDate = ZonedDateTime.now();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company", fetch = FetchType.LAZY)
     private List<Employee> employees;
 
     public Long getId() {
@@ -46,12 +46,23 @@ public class Company {
         this.createDate = createDate;
     }
 
-    public Company(Long id, String name, ZonedDateTime createDate) {
+    public Company(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.createDate = createDate;
+    }
+
+    public Company(Long id){
+        this.id = id;
     }
 
     public Company() {
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

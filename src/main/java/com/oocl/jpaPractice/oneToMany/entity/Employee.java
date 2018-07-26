@@ -1,5 +1,6 @@
 package com.oocl.jpaPractice.oneToMany.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.time.ZonedDateTime;
 
 @Table(name = "employee")
 @Entity
-public class Employee{
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,12 +23,32 @@ public class Employee{
     @Column
     private ZonedDateTime createDate = ZonedDateTime.now();
 
+//    @JsonIgnore
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
+
     public Employee() {
     }
 
-    public Employee(Long id, String name){
+    public Employee(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Employee(Long id, String name, Company company) {
+        this.id = id;
+        this.name = name;
+        this.company = company;
+
     }
 
     public Long getId() {
@@ -53,4 +74,5 @@ public class Employee{
     public void setCreateDate(ZonedDateTime createDate) {
         this.createDate = createDate;
     }
+
 }
