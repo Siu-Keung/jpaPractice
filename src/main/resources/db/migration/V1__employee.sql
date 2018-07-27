@@ -1,6 +1,5 @@
 create table employee(
 id bigint auto_increment primary key,
 company_id bigint,
-name varchar(50),
-create_date timestamp
+name varchar(50)
 );

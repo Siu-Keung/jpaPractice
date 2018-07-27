@@ -1,6 +1,7 @@
 package com.oocl.jpaPractice.oneToMany.dto;
 
 import com.oocl.jpaPractice.oneToMany.entity.Company;
+import com.oocl.jpaPractice.oneToMany.entity.Employee;
 
 import java.time.ZonedDateTime;
 
@@ -11,38 +12,25 @@ import java.time.ZonedDateTime;
 public class EmployeeDTO {
     private Long id;
     private String name;
-    private ZonedDateTime createDate = ZonedDateTime.now();
-    private Company company;
+
+    private Long companyId;
+
+    public EmployeeDTO(Employee employee) {
+        this.id = employee.getId();
+        this.name = employee.getName();
+        this.companyId = employee.getCompany().getId();
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public ZonedDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(ZonedDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
 }

@@ -20,11 +20,9 @@ public class Employee {
     private Long id;
     @Column
     private String name;
-    @Column
-    private ZonedDateTime createDate = ZonedDateTime.now();
 
-//    @JsonIgnore
-    @ManyToOne(fetch= FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
 
@@ -67,12 +65,5 @@ public class Employee {
         this.name = name;
     }
 
-    public ZonedDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(ZonedDateTime createDate) {
-        this.createDate = createDate;
-    }
 
 }
